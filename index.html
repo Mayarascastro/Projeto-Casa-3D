@@ -21,10 +21,33 @@
 .spec-bar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 14px}.spec-bar span{border:1px solid var(--line);padding:7px 10px;border-radius:8px;background:#fff;font-size:12px;color:#67746e;line-height:1.4}.spec-bar b{color:#293c32;font-weight:700}.notes{font-size:12px;color:#718078;margin:16px 1px 0;line-height:1.7}
 @media(max-width:920px){.view-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.plot-wrap{min-width:0;overflow:hidden;height:590px}}
 @media(max-width:540px){.wrapper{padding:16px 10px 24px}.controls{padding:10px}.view-grid{gap:7px}.view-button{min-height:68px;padding:10px 9px;gap:7px}.view-name{font-size:12px}.view-num{font-size:12px}.canvas-top{padding:11px 13px}.plot-wrap{min-width:0;overflow:hidden;height:460px}.canvas-bottom{padding:12px 13px}.header h1{font-size:25px}}
+
+/* Cotas do estudo (opcional): controles separados do modelo 3D */
+[hidden]{display:none!important}
+.dimensions-tool{margin-top:13px;padding:12px 13px;border:1px solid #d9e3df;border-radius:11px;background:#f6faf8;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.dimension-check{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:700;color:#21443b;min-height:30px}
+.dimension-check input{accent-color:#1d6f7e;width:19px;height:19px;margin:0;flex-shrink:0}
+.dimension-explain{font-size:12px;line-height:1.5;color:#5b6c66;flex:1 1 280px}
+.dimensions-summary{margin:8px 0 13px;padding:12px 15px;background:#edf6f5;border:1px solid #d2e7e3;border-radius:11px;font-size:12px;color:#3b5d56;line-height:1.6}
+.dimensions-summary strong{color:#1b524c}
+.dimensions-summary .dim-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.dimensions-summary .dim-tags span{padding:5px 8px;background:white;border:1px solid #d8e7e2;border-radius:7px}
+@media(max-width:540px){.dimensions-tool{padding:10px;gap:6px}.dimension-explain{font-size:11px}.dimensions-summary{padding:11px;font-size:11px}.dimensions-summary .dim-tags span{font-size:11px}}
 </style></head><body><div class="wrapper">
 <header class="header"><div class="eyebrow">Projeto Casa Caju · B29</div>
 <h1>Estudo tridimensional</h1><p class="intro">Paredes Lightwall aparentes, laje de piso do mezanino em painéis 2P de 90 mm e estrutura de aço simplificada para estudo. Selecione uma das quatro vistas.</p></header>
-<section class="controls" aria-label="Modos de visualização"><div class="controls-title">Visualizar modelo</div><div class="view-grid"><button class="view-button" type="button" id="btn-open" onclick="setView('open')" aria-pressed="true"><span class="view-num">01</span><span class="view-name">Casa aberta + beirais</span></button><button class="view-button" type="button" id="btn-roof" onclick="setView('roof')" aria-pressed="false"><span class="view-num">02</span><span class="view-name">Com telha branca</span></button><button class="view-button" type="button" id="btn-steel" onclick="setView('steel')" aria-pressed="false"><span class="view-num">03</span><span class="view-name">Somente estrutura de aço</span></button><button class="view-button" type="button" id="btn-stair" onclick="setView('stair')" aria-pressed="false"><span class="view-num">04</span><span class="view-name">Aço + escada + Lightwall</span></button></div></section><div class="spec-bar"><span><b>Lightwall</b> 2P · 90 mm</span><span><b>Apoios</b> 1,50 m entre eixos (estudo)</span><span><b>Acabamento</b> juntas tratadas + verniz</span><span><b>Estrutura</b> aço preto</span></div><main class="canvas-card"><div class="canvas-top"><strong id="view-heading">01 · Casa aberta + beirais</strong><small>Arraste para girar · role para aproximar</small></div><div class="plot-wrap"><script>/**
+<section class="controls" aria-label="Modos de visualização"><div class="controls-title">Visualizar modelo</div><div class="view-grid"><button class="view-button" type="button" id="btn-open" onclick="setView('open')" aria-pressed="true"><span class="view-num">01</span><span class="view-name">Casa aberta + beirais</span></button><button class="view-button" type="button" id="btn-roof" onclick="setView('roof')" aria-pressed="false"><span class="view-num">02</span><span class="view-name">Com telha branca</span></button><button class="view-button" type="button" id="btn-steel" onclick="setView('steel')" aria-pressed="false"><span class="view-num">03</span><span class="view-name">Somente estrutura de aço</span></button><button class="view-button" type="button" id="btn-stair" onclick="setView('stair')" aria-pressed="false"><span class="view-num">04</span><span class="view-name">Aço + escada + Lightwall</span></button></div>
+<div class="dimensions-tool" id="dimensions-tool" hidden>
+  <label class="dimension-check" for="toggle-dims"><input type="checkbox" id="toggle-dims" checked> Exibir cotas principais no 3D</label>
+  <span class="dimension-explain">Cotas de referência, não dimensões de perfis ou projeto estrutural.</span>
+</div>
+</section>
+<div id="dimensions-summary" class="dimensions-summary" hidden>
+  <strong>Medidas de estudo · estrutura metálica</strong>
+  <div class="dim-tags"><span>Mezanino: 6,00 × 3,00 m</span><span>Travessas: ~1,50 m entre eixos</span><span>Porta-balcão: 5,00 × 2,40 m</span><span>Piso do mezanino: +2,80 m</span><span>Cobertura: 15% (estudo)</span></div>
+  As linhas azul-esverdeadas indicam geometria e posições aproximadas. Não indicam bitolas, seções nem cargas admissíveis.
+</div>
+<div class="spec-bar"><span><b>Lightwall</b> 2P · 90 mm</span><span><b>Apoios</b> 1,50 m entre eixos (estudo)</span><span><b>Acabamento</b> juntas tratadas + verniz</span><span><b>Estrutura</b> aço preto</span></div><main class="canvas-card"><div class="canvas-top"><strong id="view-heading">01 · Casa aberta + beirais</strong><small>Arraste para girar · role para aproximar</small></div><div class="plot-wrap"><script>/**
 * plotly.js v3.3.1
 * Copyright 2012-2025, Plotly, Inc.
 * All rights reserved.
@@ -3909,12 +3932,100 @@ return Plotly;
 <p class="notes"><strong>Estudo arquitetônico, não projeto estrutural:</strong> os painéis 2P de 90 mm e os apoios espaçados em até 1,50 m seguem a premissa do manual Lightwall; perfis, cargas, ligações, contraventamentos e condições de uso devem ser calculados por engenheiro. As juntas são ilustrativas e devem receber tratamento conforme o fabricante. O beiral frontal dos vidros superiores permanece ausente.</p>
 </div><script>
 const modes={"open":{"number":"01","label":"Casa aberta + beirais","description":"Paredes Lightwall com acabamento cimentício, mezanino Lightwall 2P de 90 mm com juntas aparentes, travessas de aço simplificadas e beirais laterais/de fundo.","visible":[true,true,true,true,true,true,true,true,true,true,true,true,false,true,true,true]},"roof":{"number":"02","label":"Com telha branca","description":"Cobertura e forro brancos, Lightwall aparente na área comum e dois vidros fixos superiores.","visible":[true,true,true,true,true,true,true,true,true,true,true,true,true,false,true,true]},"steel":{"number":"03","label":"Somente estrutura de aço","description":"Aço da cobertura e do mezanino, três travessas internas de piso, vigas de borda, pilares, corrimão e longarina central da escada.","visible":[false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false]},"stair":{"number":"04","label":"Aço + escada + Lightwall","description":"Vigas e pilares pretos, degraus de madeira, placas Lightwall do piso/teto do mezanino (90 mm) e juntas tratadas.","visible":[false,false,true,true,true,true,true,true,false,false,false,false,false,false,true,false]}};
-function setView(mode){const entry=modes[mode];if(!entry)return;
-const plot=document.getElementById('caju-plot');
-Plotly.restyle(plot,{visible:entry.visible});
-document.getElementById('view-heading').textContent=entry.number+' · '+entry.label;
-document.getElementById('view-desc').textContent=entry.description;
-document.querySelectorAll('.view-button').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.id==='btn-'+mode)));
+
+// Only a conceptual geometry overlay. All structural profiles and connections
+// must be dimensioned by an engineer; supports at 1.50m are the study premise.
+const dimCoords={x:[],y:[],z:[],text:[]};
+function addLine3D(a,b){
+  for(const p of [a,b]){dimCoords.x.push(p[0]);dimCoords.y.push(p[1]);dimCoords.z.push(p[2]);dimCoords.text.push('');}
+  dimCoords.x.push(null);dimCoords.y.push(null);dimCoords.z.push(null);dimCoords.text.push('');
 }
-window.addEventListener('load',()=>{document.getElementById('caju-plot').on('plotly_afterplot',()=>{});setView('open');});
+function addLabel3D(p,txt){
+  dimCoords.x.push(p[0]);dimCoords.y.push(p[1]);dimCoords.z.push(p[2]);dimCoords.text.push(txt);
+  dimCoords.x.push(null);dimCoords.y.push(null);dimCoords.z.push(null);dimCoords.text.push('');
+}
+function addDim3D(a,b,label,labelPoint,witnessA,witnessB,axis){
+  if(witnessA)addLine3D(witnessA,a);
+  if(witnessB)addLine3D(witnessB,b);
+  addLine3D(a,b);
+  if(axis==='x'){
+    const d=0.10;
+    addLine3D([a[0],a[1]-d,a[2]],[a[0],a[1]+d,a[2]]);
+    addLine3D([b[0],b[1]-d,b[2]],[b[0],b[1]+d,b[2]]);
+  } else if(axis==='y'){
+    const d=0.10;
+    addLine3D([a[0]-d,a[1],a[2]],[a[0]+d,a[1],a[2]]);
+    addLine3D([b[0]-d,b[1],b[2]],[b[0]+d,b[1],b[2]]);
+  } else {
+    const d=0.12;
+    addLine3D([a[0]-d,a[1],a[2]],[a[0]+d,a[1],a[2]]);
+    addLine3D([b[0]-d,b[1],b[2]],[b[0]+d,b[1],b[2]]);
+  }
+  addLabel3D(labelPoint,label);
+}
+
+// x = largura do volume; y = profundidade (0 = fachada); z = altura.
+// Longitudinal mezzanine floor is approx. x 4.82..7.82, y .18..6.08, z 2.80.
+addDim3D([8.32,0.18,2.94],[8.32,6.08,2.94],
+         'Mezanino · 6,00 m',[8.40,3.13,3.06],
+         [7.82,0.18,2.80],[7.82,6.08,2.80],'y');
+addDim3D([4.82,6.48,2.93],[7.82,6.48,2.93],
+         '3,00 m',[6.32,6.54,3.06],
+         [4.82,6.08,2.80],[7.82,6.08,2.80],'x');
+addDim3D([6.12,1.65,2.38],[6.12,3.13,2.38],
+         '~1,50 m · apoios',[6.12,2.38,2.25],
+         [6.12,1.65,2.66],[6.12,3.13,2.66],'y');
+addDim3D([1.53,-0.55,0.08],[6.53,-0.55,0.08],
+         'Porta · 5,00 m',[4.03,-0.64,0.20],
+         [1.53,0.00,0.20],[6.53,0.00,0.20],'x');
+addDim3D([1.22,-0.48,0.15],[1.22,-0.48,2.55],
+         '2,40 m',[1.05,-0.52,1.45],
+         [1.53,0.00,0.15],[1.53,0.00,2.55],'z');
+addDim3D([8.74,5.65,0.00],[8.74,5.65,2.80],
+         'Piso +2,80 m',[8.77,5.65,1.48],
+         [7.82,5.65,0.00],[7.82,5.65,2.80],'z');
+
+const dimensionTrace={
+  type:'scatter3d',mode:'lines+text',name:'Cotas de estudo',
+  x:dimCoords.x,y:dimCoords.y,z:dimCoords.z,text:dimCoords.text,
+  textposition:'top center',textfont:{color:'#066987',size:12,family:'Arial, sans-serif'},
+  line:{color:'#0580a7',width:5},opacity:1,
+  hoverinfo:'skip',showlegend:false,visible:false
+};
+let currentMode='open';
+let overlayReady=false;
+const originalTraceCount=modes.open.visible.length;
+const dimensionsControl=document.getElementById('dimensions-tool');
+const dimensionsToggle=document.getElementById('toggle-dims');
+const dimensionsSummary=document.getElementById('dimensions-summary');
+
+function setView(mode){
+  const entry=modes[mode];if(!entry)return;
+  currentMode=mode;
+  const steelMode=(mode==='steel');
+  dimensionsControl.hidden=!steelMode;
+  dimensionsSummary.hidden=!(steelMode&&dimensionsToggle.checked);
+  const plot=document.getElementById('caju-plot');
+  if(plot&&plot.data){
+    const visibility=entry.visible.slice();
+    if(overlayReady)visibility.push(steelMode&&dimensionsToggle.checked);
+    Plotly.restyle(plot,{visible:visibility});
+  }
+  document.getElementById('view-heading').textContent=entry.number+' · '+entry.label;
+  document.getElementById('view-desc').textContent=entry.description;
+  document.querySelectorAll('.view-button').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.id==='btn-'+mode)));
+}
+dimensionsToggle.addEventListener('change',()=>setView(currentMode));
+window.addEventListener('load',async()=>{
+  const plot=document.getElementById('caju-plot');
+  try {
+    // Append to existing embedded Plotly visualization (no external CDN required).
+    await Plotly.addTraces(plot,[dimensionTrace]);
+    overlayReady=plot.data.length===originalTraceCount+1;
+  }catch(error){
+    console.error('Não foi possível iniciar as cotas 3D:',error);
+    dimensionsControl.hidden=true;
+  }
+  setView('open');
+});
 </script></body></html>
